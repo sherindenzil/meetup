@@ -25,3 +25,28 @@ module.exports.getAccessToken = async (event) => {
     }),
   };
 };
+
+module.exports.refreshAccessToken = async (event) => {
+  const MEETUP_OAUTH_URL =
+    "https://secure.meetup.com/oauth2/access" +
+    "?client_id=buc4j06kc0rfv311tfnstu1fc9" +
+    "&client_secret=gra6i77alfopaee2l4ipsd6lch" +
+    "&grant_type=refresh_token" +
+    "&refresh_token=" +
+    event.pathParameters.code;
+
+  const info = await axios.post(MEETUP_OAUTH_URL);
+
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true,
+      //"Access-Control-Allow-Origin": "http://localhost:8080"
+    },
+    body: JSON.stringify({
+      access_token: info.data.access_token,
+      refresh_token: info.data.refresh_token,
+    }),
+  };
+};
