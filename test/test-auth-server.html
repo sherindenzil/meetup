@@ -8,6 +8,12 @@
       <p id="result"></p>
     </div>
 
+    <div id="container-refresh">
+      <input id="refresh" type="text" placeholder="refresh token" />
+      <button id="refreshToken">Refresh Token</button>
+      <p id="refreshed"></p>
+    </div>
+
     <script type="text/javascript">
       const getTokenElement = document.getElementById("getToken");
       getTokenElement.onclick = function () {
@@ -26,6 +32,25 @@
           })
           .then(function (json) {
             resultElement.innerText = JSON.stringify(json);
+          });
+      };
+
+      const refreshTokenElement = document.getElementById("refreshToken");
+      refreshTokenElement.onclick = function () {
+        const refreshElement = document.getElementById("refresh");
+        const refreshedElement = document.getElementById("refreshed");
+        const refreshedValue = refreshElement.value;
+
+        const refreshURL =
+          "https:vjnp8zr06l.execute-api.us-east-2.amazonaws.com/dev/api/refresh_token/" +
+          refreshedValue;
+
+        fetch(refreshURL)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            refreshedElement.innerText = JSON.stringify(json);
           });
       };
     </script>
