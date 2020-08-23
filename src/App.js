@@ -7,11 +7,11 @@ import EventList from "./EventList";
 import "./App.css";
 
 class App extends Component {
-  //  state = {
-  //     events: [],
-  //     lat: null,
-  //     lon: null,
-  //   };
+  state = {
+    events: [],
+    //     lat: null,
+    //     lon: null,
+  };
 
   // updateEvents = (lat, lon) => {
   //   getEvents(lat, lon).then((events) => this.setState({ events }));
@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <CitySearch />
-        <EventList event={this.state.events} />
+        <EventList event={this.state.event} />
         {<NumberOfEvents numberOfEvents={this.state.events.length} />}
       </div>
     );
